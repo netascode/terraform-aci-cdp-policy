@@ -1,9 +1,9 @@
 output "dn" {
-  value       = aci_rest.fvTenant.id
-  description = "Distinguished name of `fvTenant` object."
+  value       = aci_rest.cdpIfPol.id
+  description = "Distinguished name of `cdpIfPol` object."
 }
 
 output "name" {
-  value       = aci_rest.fvTenant.content.name
-  description = "Tenant name."
+  value       = aci_rest.cdpIfPol.content.name
+  description = "CDP interface policy name."
 }
