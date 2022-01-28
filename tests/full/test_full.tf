@@ -5,8 +5,8 @@ terraform {
     }
 
     aci = {
-      source  = "netascode/aci"
-      version = ">=0.2.0"
+      source  = "CiscoDevNet/aci"
+      version = ">=2.0.0"
     }
   }
 }
@@ -18,7 +18,7 @@ module "main" {
   admin_state = true
 }
 
-data "aci_rest" "cdpIfPol" {
+data "aci_rest_managed" "cdpIfPol" {
   dn = "uni/infra/cdpIfP-${module.main.name}"
 
   depends_on = [module.main]
@@ -29,13 +29,13 @@ resource "test_assertions" "cdpIfPol" {
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.cdpIfPol.content.name
+    got         = data.aci_rest_managed.cdpIfPol.content.name
     want        = module.main.name
   }
 
   equal "adminSt" {
     description = "adminSt"
-    got         = data.aci_rest.cdpIfPol.content.adminSt
+    got         = data.aci_rest_managed.cdpIfPol.content.adminSt
     want        = "enabled"
   }
 }
